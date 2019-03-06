@@ -1,0 +1,43 @@
+\ProvidesFile{thesis.bbx}
+
+\RequireBibliographyStyle{standard}
+\RequireBibliographyStyle{numeric}
+
+\ExecuteBibliographyOptions{
+  giveninits,
+  maxnames = 3,
+  maxcitenames = 1,
+  sorting = none,
+}
+
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \uspunctuation%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \printfield{title}%
+  \newunit\newblock
+  \usebibmacro{journal+volume+pages}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \newblock
+  \usebibmacro{finentry}}
+
+\newbibmacro*{journal+volume+pages}{%
+  \usebibmacro{journal}%
+  \setunit{\addspace}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}%
+  \newunit
+  \setunit{\bibpagespunct}%
+  \printfield{pages}}
+
+\DeclareCiteCommand{\superbracketcite}[\mkbibsuperscript]
+  {\bibopenbracket}
+  {\usebibmacro{citeindex}\usebibmacro{cite}}
+  {\supercitedelim}
+  {\bibclosebracket}
